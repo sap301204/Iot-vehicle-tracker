@@ -1,0 +1,23 @@
+name: Arduino CI
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install arduino-cli
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y wget
+          wget https://downloads.arduino.cc/arduino-cli/arduino-cli_latest_Linux_64bit.tar.gz
+          tar -xzf arduino-cli_latest_Linux_64bit.tar.gz
+          sudo mv arduino-cli /usr/local/bin/
+      - name: Setup cores & libs
+        run: |
+          arduino-cli core update-index
+          arduino-cli core install esp32:esp32
+          arduino-cli lib install "TinyGPSPlus"
+          arduino-cli lib install "PubSubClient"
+          arduino-cli lib install "Blynk"
+      - name: Compile
+        run: arduino-cli compile --fqbn esp32:esp32:esp32 code/esp32_tracker/vehicle_tracker.ino

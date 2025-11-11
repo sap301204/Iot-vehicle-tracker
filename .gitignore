@@ -1,0 +1,7 @@
+.vscode/
+*.log
+*.bin
+build/
+.DS_Store
+.env
+*.zip

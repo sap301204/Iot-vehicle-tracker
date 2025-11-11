@@ -1,0 +1,72 @@
+[
+  {
+    "id":"1",
+    "type":"tab",
+    "label":"Vehicle Tracker"
+  },
+  {
+    "id":"mqtt_in",
+    "type":"mqtt in",
+    "z":"1",
+    "name":"Telemetry In",
+    "topic":"vehicle/vehicle001/data",
+    "broker":"broker_hivemq"
+  },
+  {
+    "id":"json_parse",
+    "type":"json",
+    "z":"1",
+    "name":"Parse JSON",
+    "wires":[["geofence"]]
+  },
+  {
+    "id":"geofence",
+    "type":"function",
+    "z":"1",
+    "name":"Geofence",
+    "func":"var p = msg.payload; msg.lat = p.lat; msg.lon = p.lon; msg.speed = p.speed; return msg;",
+    "wires":[["ui_map","influx_write","mqtt_status"]]
+  },
+  {
+    "id":"ui_map",
+    "type":"ui_template",
+    "z":"1",
+    "name":"Map (simple)",
+    "template":"<div>Lat: {{msg.lat}} Lon: {{msg.lon}} Speed: {{msg.speed}}</div>"
+  },
+  {
+    "id":"influx_write",
+    "type":"influxdb out",
+    "z":"1",
+    "influxdb":"influx1",
+    "name":"Write to InfluxDB",
+    "measurement":"vehicle_telemetry"
+  },
+  {
+    "id":"mqtt_status",
+    "type":"mqtt out",
+    "z":"1",
+    "name":"Status Out",
+    "topic":"vehicle/vehicle001/status",
+    "broker":"broker_hivemq"
+  },
+  {
+    "id":"ui_lock",
+    "type":"ui_button",
+    "z":"1",
+    "name":"LOCK",
+    "group":"ui_group",
+    "label":"LOCK",
+    "topic":"vehicle/vehicle001/control",
+    "payload":"LOCK",
+    "wires":[["mqtt_out"]]
+  },
+  {
+    "id":"mqtt_out",
+    "type":"mqtt out",
+    "z":"1",
+    "name":"Control Out",
+    "topic":"vehicle/vehicle001/control",
+    "broker":"broker_hivemq"
+  }
+]

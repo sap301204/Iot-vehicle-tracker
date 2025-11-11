@@ -1,0 +1,11 @@
+Project Deliverables Format included in this repo:
+1. Project Title & Problem Statement
+2. Folder Structure & File Plan
+3. Code Implementation (complete, in text form)
+4. Synthetic or Sample Dataset (if needed)
+5. Step-by-Step Workflow (Lab Logbook)
+6. Architecture Diagram & Data Flow (ASCII or text)
+7. README.md (formatted for GitHub)
+8. Demo Script & Screenshot Plan
+9. Resume Bullet Points (3–5 points)
+10. MIT License & Optional GitHub Action (CI)

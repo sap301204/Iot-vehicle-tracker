@@ -1,0 +1,3 @@
+- Implemented ESP32-based IoT Vehicle Tracking & Theft Prevention System with real-time GPS telemetry and remote immobilization.
+- Built Node-RED and Blynk IoT dashboards for live control and push notifications; integrated InfluxDB/Grafana for analytics.
+- Ensured automotive-grade safety with fused power inputs, opto-isolated relay control, and GSM fallback for alerts.

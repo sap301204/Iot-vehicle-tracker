@@ -1,0 +1,1 @@
+Create screenshots for Blynk, Grafana, Node-RED, alert popup, and system overview.
